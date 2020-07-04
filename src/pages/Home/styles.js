@@ -1,11 +1,27 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
+
+const inputSizes = {
+  big: css`
+    width: 700px;
+  `,
+  middle: css`
+  width: 400px;
+`,
+  small: css`
+  width: 60px;
+`,
+}
 
 export const Container = styled.div`
   width: 100%;
-  max-width: 800px;
-  padding: 20px;
+  max-width: 780px;
+  padding: 0 10px;
   margin: 0 auto;
+
+  @media (min-width: 320px ) {
+    padding: 0 5px;
+  }
 `
 
 export const Header = styled.header`
@@ -21,11 +37,74 @@ export const Header = styled.header`
   }
 `
 
+export const AddressContainer = styled.form`
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+
+  div {
+   display: flex; 
+   box-sizing: border-box;
+   flex: 1;
+   justify-content: space-between;
+   align-items: center;
+  
+   /* padding: 4px; */
+    input {
+      padding: 6px;
+      width: 150px;
+      border: 1px solid black;
+      color: #8A2BE2;
+      
+      &:disabled {
+        background: #eee ;
+      }
+
+      @media (min-width: 465px){
+        flex: 1;
+      }
+
+      & + input {
+         margin-left: 8px;
+
+         @media (min-width: 465px){
+           margin-left: 20px;
+         }
+      }
+    } 
+
+    & + div {
+      margin-top: 12px;
+    } 
+  }
+
+`
+
+export const Cep = styled.div`
+  display: flex;
+  align-items: center;
+  width: 150px;
+  border: 1px solid black;
+  padding: 4px;
+  color: #8A2BE2;
+
+  input {
+    border: 0 !important;
+    width: 90px !important;
+    flex: 1;
+  }
+`
+
 
 export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 20px;
+  margin-top: 50px;
+
 
   @media (min-width: 850px){
     flex-direction: row;
@@ -48,7 +127,7 @@ export const CardInformations = styled.form`
     align-items: center;
     padding: 8px;
     margin-top: 20px;
-    border-bottom: 1px solid black;
+    border: 1px solid black;
     
     input {
       border: 0;

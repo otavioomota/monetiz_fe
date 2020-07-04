@@ -1,6 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import creditCardType from 'credit-card-type'
 import { 
+  FiSearch,
   FiUser, 
   FiCreditCard, 
   FiCalendar, 
@@ -9,18 +10,32 @@ import {
 
 
 import monetiz from '../../assets/monetiz.jpg';
+import api from '../../services/api';
+import translatorUF from '../../utils/translatorUFState';
 
 import CreditCard from '../../components/CreditCard';
 
 import { 
   Container, 
-  Header, 
+  Header,
+  AddressContainer,
+  Cep, 
   CardContainer, 
   CardInformations, 
   CardInformationsSecundary 
 } from './styles'
 
 function Home(){
+
+  const [cep, setCep] = useState('');
+  const [street, setStreet] = useState('');
+  const [number, setNumber] = useState('');
+  const [neighborhood, setNeighborhood] = useState('');
+  const [additional, setAdditional] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+
+  const [fieldLoaded, setFieldLoaded] = useState(false);
 
   const [cardHolder, setCardHolder] = useState('');
   const [cardNumber, setCardNumber] = useState('');
@@ -29,6 +44,25 @@ function Home(){
   const [cvc, setCvc] = useState('')
   const [cardBrand, setCardBrand ] = useState('');
   const [flipped, setFlipped] = useState(false);
+
+  useEffect(() => {
+    async function loadingCep() {
+      const response = await api.get(`https://viacep.com.br/ws/${cep}/json`);
+      
+      setStreet(response.data.logradouro);
+      setNeighborhood(response.data.bairro);
+      setCity(response.data.localidade);
+      setState(translatorUF(response.data.uf));
+
+      console.log(response.data);
+      setFieldLoaded(true);
+    }
+
+    if(cep.length >= 8){
+      loadingCep();
+    }
+  },[cep]);
+
 
   const handleCardFlip = useCallback(() => {
     setFlipped(!flipped);
@@ -54,6 +88,73 @@ function Home(){
         <h2>Monetiz</h2>
       </Header>
       
+      <AddressContainer>
+          <Cep>
+            <input 
+              onChange={e => setCep(e.target.value)}
+              placeholder='CEP'
+              type='text'
+            />
+            <FiSearch size={18}/>
+          </Cep>
+
+          <div>
+            <input 
+              onChange={e => setStreet(e.target.value)}
+              value={street}
+              disabled={fieldLoaded}
+              placeholder='Rua'
+              style={{flex: 1}}
+              type='text'
+            />
+
+            <input 
+              onChange={e => setNumber(e.target.value)}
+              value={number}
+              placeholder='Número'
+              type='text'
+            />
+          </div>
+
+           <div>
+            <input 
+              onChange={e => setNeighborhood(e.target.value)}
+              value={neighborhood}
+              disabled={fieldLoaded}
+              o
+              placeholder='Bairro'
+              size='small'
+              type='text'
+            />
+
+            <input 
+              onChange={e => setAdditional(e.target.value)}
+              value={additional}
+              placeholder='Complemento'
+              type='text'
+            />
+           </div>
+
+           <div>
+            <input 
+              onChange={e => setCity(e.target.value)}
+              value={city}
+              disabled={fieldLoaded}
+              placeholder='Cidade'
+              type='text'
+            />
+
+            <input 
+              onChange={e => setState(e.target.value)}
+              value={state}
+              disabled={fieldLoaded}
+              placeholder='Estado'
+              small
+              type='text'
+            />
+           </div>
+      </AddressContainer>
+
       <CardContainer>
         <CreditCard 
            cardHolder={cardHolder}
@@ -70,7 +171,7 @@ function Home(){
             <div>
               <FiUser size={18}/>
               <input 
-                onChange={e => setCardHolder(e.target.value)}  
+                onChange={e => setCardHolder(e.target.value)}
                 placeholder='Nome no cartão'
                 type='text'
               />
@@ -108,7 +209,7 @@ function Home(){
                 <FiLock size={18}/>
                 <input
                   onChange={e => setCvc(e.target.value)} 
-                  placeholder='Cvc'
+                  placeholder='CVC'
                   type='text'
                   onFocus={handleCardFlip}
                   onBlur={handleCardFlip}
