@@ -7,8 +7,8 @@ import Transactions from '../pages/Transactions';
 function Routes(){
   return(
     <Switch>
-      <Route path='/' component={Home}/>
-      <Route path='/transactions' component={Transactions} exact/>
+      <Route path='/' component={Home} exact/>
+      <Route path='/transactions' component={Transactions} />
     </Switch>
   )
 }
