@@ -1,17 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-
-const inputSizes = {
-  big: css`
-    width: 700px;
-  `,
-  middle: css`
-  width: 400px;
-`,
-  small: css`
-  width: 60px;
-`,
-}
 
 export const Container = styled.div`
   width: 100%;
@@ -55,8 +43,9 @@ export const AddressContainer = styled.form`
     input {
       padding: 6px;
       width: 150px;
-      border: 1px solid black;
+      border: 1px solid #8A2BE2;
       color: #8A2BE2;
+      border-radius: 2px;
       
       &:disabled {
         background: #eee ;
@@ -89,6 +78,7 @@ export const Cep = styled.div`
   border: 1px solid black;
   padding: 4px;
   color: #8A2BE2;
+  border-radius: 2px;
 
   input {
     border: 0 !important;
@@ -128,6 +118,7 @@ export const CardInformations = styled.form`
     padding: 8px;
     margin-top: 20px;
     border: 1px solid black;
+    border-radius: 2px;
     
     input {
       border: 0;
