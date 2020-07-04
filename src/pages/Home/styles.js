@@ -34,19 +34,6 @@ export const Container = styled.div`
   }
 `
 
-export const Header = styled.header`
-  /* background-color: #312E38; */
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-
-  img {
-    height: 56px;
-    width: 56px;
-  }
-`
-
 export const UserInformations = styled.div`
     width: 100%;
     display: flex;

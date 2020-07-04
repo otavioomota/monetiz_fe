@@ -11,18 +11,16 @@ import {
 
 import { toast } from 'react-toastify';
 
-
-import monetiz from '../../assets/monetiz.jpg';
 import api from '../../services/api';
 import translatorUF from '../../utils/translatorUFState';
 
+import Header from '../../components/Header';
 import CreditCard from '../../components/CreditCard';
 
 import { useTransaction  } from '../../hooks/transaction'
 
 import { 
-  Container, 
-  Header,
+  Container,
   UserInformations,
   AddressContainer,
   Cep, 
@@ -149,11 +147,9 @@ function Home(){
 
   return (
    <Container>
-      <Header>
-        <img src={monetiz} alt='Monetiz'/>
-        <h2>Monetiz</h2>
-      </Header>
 
+      <Header />
+      
       <UserInformations>
         <div>
           <FiUser size={18} color='#8A2BE2'/>
