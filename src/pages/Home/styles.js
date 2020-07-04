@@ -1,14 +1,36 @@
 import styled from 'styled-components';
-
+import { shade } from 'polished'
 
 export const Container = styled.div`
   width: 100%;
   max-width: 780px;
   padding: 0 10px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+
+
+  button {
+    margin: 100px 0;
+    
+    align-self: center;
+    border: 0;
+
+    background: #8A2BE2;
+    padding: 10px;
+    border-radius: 8px;
+    color: #fff;
+
+    transition: background 0.2s;
+
+    &:hover {
+      background: ${shade(0.2, '#8A2BE2')}
+    }
+    
+  }
 
   @media (min-width: 320px ) {
-    padding: 0 5px;
+    padding: 0 2px;
   }
 `
 
@@ -28,11 +50,16 @@ export const Header = styled.header`
 export const UserInformations = styled.div`
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0 10px;
+
 
     div {
       display: flex;
+
+      flex:1 ;
       align-items: center;
       padding: 8px;
       margin-top: 20px;
@@ -45,9 +72,10 @@ export const UserInformations = styled.div`
       margin-left: 4px;
     }
 
-    & + div {
+    /* & + div {
       margin-left: 20px;
-    }
+    } */
+
 
   }
 `
@@ -83,7 +111,7 @@ export const AddressContainer = styled.form`
       }
 
       & + input {
-         margin-left: 8px;
+         margin-left: 4px;
 
          @media (min-width: 465px){
            margin-left: 20px;
@@ -119,7 +147,7 @@ export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 2px;
   margin-top: 50px;
 
 

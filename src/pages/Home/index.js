@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import creditCardType from 'credit-card-type'
+import creditCardType from 'credit-card-type';
 import { 
   FiSearch,
   FiDollarSign,
@@ -7,7 +7,9 @@ import {
   FiCreditCard, 
   FiCalendar, 
   FiLock 
-} from 'react-icons/fi'
+} from 'react-icons/fi';
+
+import { toast } from 'react-toastify';
 
 
 import monetiz from '../../assets/monetiz.jpg';
@@ -15,6 +17,8 @@ import api from '../../services/api';
 import translatorUF from '../../utils/translatorUFState';
 
 import CreditCard from '../../components/CreditCard';
+
+import { useTransaction  } from '../../hooks/transaction'
 
 import { 
   Container, 
@@ -27,7 +31,10 @@ import {
   CardInformationsSecundary 
 } from './styles'
 
+
 function Home(){
+
+  const { handleCheckout } = useTransaction()
 
   const [userName, setUserName] = useState('');
   const [price, setPrice] = useState('');
@@ -39,6 +46,7 @@ function Home(){
   const [additional, setAdditional] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
+  const [stateInitials, setStateInitials] = useState('')
 
   const [fieldLoaded, setFieldLoaded] = useState(false);
 
@@ -58,6 +66,7 @@ function Home(){
       setNeighborhood(response.data.bairro);
       setCity(response.data.localidade);
       setState(translatorUF(response.data.uf));
+      setStateInitials(response.data.uf);
 
       setFieldLoaded(true);
     }
@@ -66,6 +75,59 @@ function Home(){
       loadingCep();
     }
   },[cep]);
+
+  const handleSubmit = useCallback(async () => {
+    const data = {
+      address: {
+        street,
+        number,
+        neighborhood,
+        zip_code: cep,
+        city,
+        state: stateInitials,
+        additional
+      },
+      user:{
+        name: userName
+      },
+      cardOwnerData: {
+        name: cardHolder,
+        email:"compradorteste@teste.com",
+        birthdate:"1991-01-02"
+      },
+      creditCardData: {
+        cc_number: cardNumber,
+        cc_holder: cardHolder,
+        cc_validity: `${cardMonthValidity}/${cardYearValidity}`,
+        cc_cvc: cvc,
+        cc_brand: cardBrand
+      }
+    }
+
+    try {
+      await handleCheckout(data);
+      toast.success('Transação realizada com sucesso !')
+    } catch(err){
+      toast.error('Opa, ocorreu algum erro. Tente novamente !')
+    }
+
+  }, [
+    additional, 
+    cardBrand, 
+    cardHolder, 
+    cardMonthValidity, 
+    cardNumber, 
+    cardYearValidity, 
+    cep, 
+    city, 
+    cvc, 
+    handleCheckout, 
+    neighborhood, 
+    number,
+    stateInitials, 
+    street, 
+    userName
+  ])
 
 
   const handleCardFlip = useCallback(() => {
@@ -244,6 +306,13 @@ function Home(){
 
         </CardInformations>
       </CardContainer>
+
+      <button 
+        type='button'
+        onClick={handleSubmit}
+      >
+        Confirmar
+      </button>
    </Container>
   )
 }
