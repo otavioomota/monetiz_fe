@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import creditCardType from 'credit-card-type'
 import { 
   FiUser, 
   FiCreditCard, 
@@ -6,7 +7,10 @@ import {
   FiLock 
 } from 'react-icons/fi'
 
+
 import monetiz from '../../assets/monetiz.jpg';
+
+import CreditCard from '../../components/CreditCard';
 
 import { 
   Container, 
@@ -23,6 +27,25 @@ function Home(){
   const [cardMonthValidity, setCardMonthValidity] = useState('')
   const [cardYearValidity, setCardYearValidity] = useState('')
   const [cvc, setCvc] = useState('')
+  const [cardBrand, setCardBrand ] = useState('');
+  const [flipped, setFlipped] = useState(false);
+
+  const handleCardFlip = useCallback(() => {
+    setFlipped(!flipped);
+  },[flipped])
+
+  const handleCardBrand = useCallback(() => {
+    if(cardNumber.length >= 4){
+      const brand = creditCardType(cardNumber);
+      setCardBrand(brand[0].niceType.toLowerCase())
+    }
+  }, [cardNumber]);
+
+  const handleCardNumber = useCallback((cardNumber) => {
+    
+    setCardNumber(cardNumber);
+    handleCardBrand();
+  },[setCardNumber, handleCardBrand])
 
   return (
    <Container>
@@ -30,8 +53,17 @@ function Home(){
         <img src={monetiz} alt='Monetiz'/>
         <h2>Monetiz</h2>
       </Header>
-
+      
       <CardContainer>
+        <CreditCard 
+           cardHolder={cardHolder}
+           cardNumber={cardNumber}
+           cvc={cvc}
+           brand={cardBrand}
+           month={cardMonthValidity}
+           year={cardYearValidity}
+           flipped={flipped}
+        />
         <CardInformations>
             <span>Informações do cartão de crédito</span>
 
@@ -47,7 +79,7 @@ function Home(){
             <div>
               <FiCreditCard size={18}/>
               <input 
-                onChange={e => setCardNumber(e.target.value)}
+                onChange={e => handleCardNumber(e.target.value)}
                 placeholder='Número do cartão'
                 type='text'
               />
@@ -78,6 +110,8 @@ function Home(){
                   onChange={e => setCvc(e.target.value)} 
                   placeholder='Cvc'
                   type='text'
+                  onFocus={handleCardFlip}
+                  onBlur={handleCardFlip}
                 />
               </div>
             </CardInformationsSecundary>

@@ -22,9 +22,20 @@ export const Header = styled.header`
 `
 
 
-export const CardContainer = styled.div``
-export const CardInformations = styled.form`
+export const CardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
+  @media (min-width: 850px){
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+`
+export const CardInformations = styled.form`
+  margin-top: 50px;
+  width: 100%;
   max-width: 400px;
 
   span {
@@ -52,6 +63,11 @@ export const CardInformations = styled.form`
     & + div {
       margin-top: 14px;
     }
+  }
+
+  @media (min-width: 850px){
+    margin-left: 50px;
+    margin-top: 0px;
   }
 `
 
