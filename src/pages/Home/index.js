@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import creditCardType from 'credit-card-type'
 import { 
   FiSearch,
+  FiDollarSign,
   FiUser, 
   FiCreditCard, 
   FiCalendar, 
@@ -18,6 +19,7 @@ import CreditCard from '../../components/CreditCard';
 import { 
   Container, 
   Header,
+  UserInformations,
   AddressContainer,
   Cep, 
   CardContainer, 
@@ -26,6 +28,9 @@ import {
 } from './styles'
 
 function Home(){
+
+  const [userName, setUserName] = useState('');
+  const [price, setPrice] = useState('');
 
   const [cep, setCep] = useState('');
   const [street, setStreet] = useState('');
@@ -54,7 +59,6 @@ function Home(){
       setCity(response.data.localidade);
       setState(translatorUF(response.data.uf));
 
-      console.log(response.data);
       setFieldLoaded(true);
     }
 
@@ -87,6 +91,27 @@ function Home(){
         <img src={monetiz} alt='Monetiz'/>
         <h2>Monetiz</h2>
       </Header>
+
+      <UserInformations>
+        <div>
+          <FiUser size={18} color='#8A2BE2'/>
+          <input 
+            onChange={e => setUserName(e.target.value)}
+            placeholder='Seu nome'
+            type='text'
+          />
+        </div>
+
+        <div>
+          <FiDollarSign size={18} color='green'/>
+          <input 
+            onChange={e => setPrice(e.target.value)}
+            value={price}
+            placeholder='Valor total'
+            type='text'
+          />
+        </div>
+      </UserInformations>
       
       <AddressContainer>
           <Cep>

@@ -25,10 +25,37 @@ export const Header = styled.header`
   }
 `
 
+export const UserInformations = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    div {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      margin-top: 20px;
+      border: 1px solid black;
+      border-radius: 2px;
+      
+    input {
+      border: 0;
+      flex: 1;
+      margin-left: 4px;
+    }
+
+    & + div {
+      margin-left: 20px;
+    }
+
+  }
+`
+
 export const AddressContainer = styled.form`
   width: 100%;
   max-width: 760px;
-  margin: 0 auto;
+  margin: 50px auto 0;
   display: flex;
   flex-direction: column;
 
