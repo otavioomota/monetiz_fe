@@ -2,9 +2,10 @@ import styled from 'styled-components';
 import { lighten } from 'polished';
 
 export const Container = styled.header`
-  /* background-color: #312E38; */
+  background-color: #fff;
   width: 100%;
   max-width: 1120px;
+  padding: 0 10px;
   
   display: flex;
   justify-content: space-between;

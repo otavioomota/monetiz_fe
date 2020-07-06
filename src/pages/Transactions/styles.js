@@ -48,11 +48,16 @@ export const TransactionsContainer = styled.table`
 
   tr {
     margin: 0 auto;
+    
     td {
       padding: 10px;
     }
     & + tr {
       cursor: pointer;
+    }
+
+    & + tr {
+      border-bottom: 1px solid black;
     }
   }
 

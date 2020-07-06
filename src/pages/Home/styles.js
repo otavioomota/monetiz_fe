@@ -52,6 +52,7 @@ export const UserInformations = styled.div`
       margin-top: 20px;
       border: 1px solid black;
       border-radius: 2px;
+      background: #fff;
       
     input {
       border: 0;
@@ -88,6 +89,7 @@ export const AddressContainer = styled.form`
       border: 1px solid #8A2BE2;
       color: #8A2BE2;
       border-radius: 2px;
+      background: #fff;
       
       &:disabled {
         background: #eee ;
@@ -121,6 +123,7 @@ export const Cep = styled.div`
   padding: 4px;
   color: #8A2BE2;
   border-radius: 2px;
+  background: #fff;
 
   input {
     border: 0 !important;
@@ -154,13 +157,14 @@ export const CardInformations = styled.form`
     font-weight: 500;
   }
 
-  div {
+   div {
     display: flex;
     align-items: center;
     padding: 8px;
     margin-top: 20px;
     border: 1px solid black;
     border-radius: 2px;
+    background: #fff;
     
     input {
       border: 0;
@@ -189,6 +193,7 @@ export const CardInformationsSecundary = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 !important; 
+  background: none !important;
   div {
     margin-top: 0 !important;
     input {

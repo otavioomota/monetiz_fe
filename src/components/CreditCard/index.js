@@ -12,15 +12,15 @@ function CreditCard({
   flipped, 
 }){
   return (
-    <PaymentCard
-      bank="itau"
-      brand={brand}
-      number={cardNumber}
-      cvv={cvc}
-      holderName={cardHolder === '' ? 'nome no cartão' : cardHolder}
-      expiration={`${month === '' ? 'MM': month}/${year === '' ? 'YYYY': year}`}
-      flipped={flipped}
-    />
+      <PaymentCard
+        bank="itau"
+        brand={brand}
+        number={cardNumber}
+        cvv={cvc}
+        holderName={cardHolder === '' ? 'nome no cartão' : cardHolder}
+        expiration={`${month === '' ? 'MM': month}/${year === '' ? 'YYYY': year}`}
+        flipped={flipped}
+      />
   )
 }
 

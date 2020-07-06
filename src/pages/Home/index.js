@@ -98,7 +98,8 @@ function Home(){
         cc_holder: cardHolder,
         cc_validity: `${cardMonthValidity}/${cardYearValidity}`,
         cc_cvc: cvc,
-        cc_brand: cardBrand
+        cc_brand: cardBrand,
+        price: Number(price),
       }
     }
 
@@ -109,23 +110,7 @@ function Home(){
       toast.error('Opa, ocorreu algum erro. Tente novamente !')
     }
 
-  }, [
-    additional, 
-    cardBrand, 
-    cardHolder, 
-    cardMonthValidity, 
-    cardNumber, 
-    cardYearValidity, 
-    cep, 
-    city, 
-    cvc, 
-    handleCheckout, 
-    neighborhood, 
-    number,
-    stateInitials, 
-    street, 
-    userName
-  ])
+  }, [additional, cardBrand, cardHolder, cardMonthValidity, cardNumber, cardYearValidity, cep, city, cvc, handleCheckout, neighborhood, number, price, stateInitials, street, userName])
 
 
   const handleCardFlip = useCallback(() => {
