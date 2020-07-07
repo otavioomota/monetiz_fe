@@ -1,7 +1,7 @@
 #monetiz_fe
 
 
-Front-end da aplicação Monetiz Pagamentos
+Front-end para realização de compra com cartão de crédito.
 
 Para rodar este projeto:
 
